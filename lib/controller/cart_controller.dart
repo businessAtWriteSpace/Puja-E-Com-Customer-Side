@@ -19,7 +19,7 @@ class CartController extends GetxController{
 
   late dynamic productSnapshot ;
   var products = [];
-
+  var vendors = [];
   var placingOrder = false.obs;
 
   calculateTotalPrice(data) {
@@ -44,6 +44,7 @@ class CartController extends GetxController{
         'vendor_id': productSnapshot[i]['vendor_id'],
         'tprice': productSnapshot[i]['totalPrice']
       });
+      vendors.add(productSnapshot[i]['vendor_id']);
     }
   }
 
@@ -71,6 +72,7 @@ class CartController extends GetxController{
       'order_delivered': false,
       'total_amount': totalAmount,
       'orders': FieldValue.arrayUnion(products),
+      'vendors': FieldValue.arrayUnion(vendors),
     });
     placingOrder(false);
   }
