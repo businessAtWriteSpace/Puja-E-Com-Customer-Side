@@ -29,7 +29,7 @@ class ProfileController extends GetxController{
   }
   uploadProfileImg() async{
     var filename = basename(profileImgPath.value);
-    var destination = 'images/${currentUser!.uid}/filename';
+    var destination = 'images/${currentUser!.uid}/$filename';
     Reference ref = FirebaseStorage.instance.ref().child(destination);
     await ref.putFile(File(profileImgPath.value));
     profileImgLink = await ref.getDownloadURL();
